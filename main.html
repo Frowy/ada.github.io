@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seni seviyorum</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+        }
+        #container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 20px;
+            background: #ffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        #yesButton {
+            background: #4CAF50;
+            color: white;
+        }
+        #yesButton:hover {
+            background: #45a049;
+        }
+        #noButton {
+            background: #f44336;
+            color: white;
+            position: absolute;
+        }
+        #message {
+            display: none;
+            margin-top: 20px;
+            font-size: 14px;
+            color: green;
+        }
+        @media (max-width: 600px) {
+            button {
+                width: 80%;
+                font-size: 14px;
+            }
+            #noButton {
+                width: 80%;
+            }
+        }
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h2>Seni çok seviyorum Ada.<br> Acaba bende senin için değerli ve özel birisi olabilirmiyim?</h2>
+        <button id="yesButton">Yes</button> <br>
+        <button id="noButton">No</button>
+        <div id="message">Butona bastınız!</div>
+    </div>
+    <script>
+        const noButton = document.getElementById('noButton');
+        const yesButton = document.getElementById('yesButton');
+        const message = document.getElementById('message');
+
+        function moveNoButton() {
+            const containerRect = document.getElementById('container').getBoundingClientRect();
+            const isMobile = window.innerWidth <= 600;
+            const maxX = isMobile ? containerRect.width - noButton.offsetWidth - 20 : window.innerWidth - noButton.offsetWidth;
+            const maxY = isMobile ? containerRect.height - noButton.offsetHeight - 20 : window.innerHeight - noButton.offsetHeight;
+            let x, y;
+            do {
+                x = Math.random() * maxX;
+                y = Math.random() * maxY;
+            } while (x < 0 || y < 0);
+            noButton.style.left = `${x}px`;
+            noButton.style.top = `${y}px`;
+        }
+
+        noButton.addEventListener('mouseover', moveNoButton);
+        noButton.addEventListener('click', moveNoButton);
+
+        yesButton.addEventListener('click', () => {
+            message.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
