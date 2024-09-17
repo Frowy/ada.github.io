@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seninle Geçen Zaman</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #e0f7fa 0%, #fbc2eb 100%);
+            color: #333;
+        }
+        .counter {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(173, 216, 230, 0.4);
+            backdrop-filter: blur(10px);
+            max-width: 90%;
+            margin: 0 10px;
+        }
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: #92b6f0;
+            
+        }
+        .time {
+            font-size: 1.8rem;
+            color: #a0bff0;
+            margin-top: 10px;
+        }
+        .heart {
+            font-size: 3rem;
+            color: #a0bff0;
+            margin-top: 20px;
+            text-shadow: 0 0 20px #a0bff0;
+            animation: pulse 2s infinite;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        /* Mobil dostu yazı boyutları */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            .time {
+                font-size: 1.5rem;
+            }
+        }
+        
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-30px); }
+            60% { transform: translateY(-15px); }
+        }
+        
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.20); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="counter">
+        <h1>Seninle Geçen Zaman</h1>
+        <div class="time" id="time"></div>
+        <div class="heart">💙</div>
+    </div>
+
+    <script>
+        function updateCounter() {
+            const startDate = new Date('2024-04-08T00:00:00');
+            const now = new Date();
+            const diff = now - startDate;
+
+            const milliseconds = diff % 1000;
+            const seconds = Math.floor(diff / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+            const months = Math.floor(days / 30);
+
+            const remainingDays = days % 30;
+            const remainingHours = hours % 24;
+            const remainingMinutes = minutes % 60;
+            const remainingSeconds = seconds % 60;
+
+            document.getElementById('time').innerHTML = 
+                `${months} ay, ${remainingDays} gün, ${remainingHours} saat, ${remainingMinutes} dakika, ${remainingSeconds} saniye`;
+
+        }
+
+        setInterval(updateCounter, 10); // Milisaniye güncellemesi için 10ms aralıkla çalışır
+    </script>
+</body>
+</html>
